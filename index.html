@@ -1,137 +1,116 @@
 <!DOCTYPE html>
-<html>
+<html lang="UTF-8">
 <head>
-	
-
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Alex Contell Portfolio</title>
     <link rel="stylesheet" href="css/main.css">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </head>
 
 <body>
 <h1>Alex Contell Portfolio</h1>
 
 <ul>
-  <li><a href="file:///Users/contell/Desktop/WEBDEV/web%20personal/portrait.html">portrait</a></li>
-  <li><a href="file:///Users/contell/Desktop/WEBDEV/web%20personal/street.html">street</a></li>
-  <li><a href="#style">style</a></li>
-  <li><a href="#diary">diary</a></li>
-  <li><a href="#commercial">commercial</a></li>
-  <li><a href="#places">places</a></li>
-  <li><a href="#video">video</a></li>
-  <li><a href="#about">about</a></li>
+    <li><a href="file:///Users/contell/Desktop/WEBDEV/web%20personal/portrait.html">portrait</a></li>
+    <li><a href="file:///Users/contell/Desktop/WEBDEV/web%20personal/street.html">street</a></li>
+    <li><a href="#style">style</a></li>
+    <li><a href="#diary">diary</a></li>
+    <li><a href="#commercial">commercial</a></li>
+    <li><a href="#places">places</a></li>
+    <li><a href="#video">video</a></li>
+    <li><a href="#about">about</a></li>
 </ul>
 
 
+<div class="container" onmousemove="changeCursor()">
 
-<div class="container" onmousemove = "changeCursor()" >
-  
-  <img id="imagen" src="imgs/1.jpg" onmouseover="whereClick()">
+    <img id="imagen" src="imgs/1.jpg" onmouseover="whereClick()">
 
 
 </div>
 
 
-
 <script>
 
 
-    
-var counter = 0;
-var fotos =["imgs/1.jpg","imgs/2.jpg","imgs/3.jpg","imgs/4.jpg","imgs/5.jpg"];
-	var elmnt = document.getElementById("imagen");
+    var counter = 0;
+    var fotos = ["imgs/1.jpg", "imgs/2.jpg", "imgs/3.jpg", "imgs/4.jpg", "imgs/5.jpg"];
+    var elmnt = document.getElementById("imagen");
 
 
+    //CHANGE THE ARROW ORIENTATION DEPENDING ON MOUSE POSITION (RELATIVE TO THE DIV CONTAINER)
+    function changeCursor() {
+        var x = event.clientX;
+
+        if (x > elmnt.clientWidth / 2) {
+            document.getElementById("imagen").style.cursor = "e-resize";
+        } else {
+            document.getElementById("imagen").style.cursor = "w-resize";
+
+        }
+
+    }
 
 
-//CHANGE THE ARROW ORIENTATION DEPENDING ON MOUSE POSITION (RELATIVE TO THE DIV CONTAINER)
-function changeCursor(){
-	var x = event.clientX;
+    //READING OF MOUSE POSITION WHEN CLICKING, TRIGGERING FUNCTION LEFT/RIGHT
+    function whereClick() {
 
-	if (x > elmnt.clientWidth/2){
-		document.getElementById("imagen").style.cursor = "e-resize";
-	}else {
-		document.getElementById("imagen").style.cursor = "w-resize";
-	
-	}
-
-}
+        imagen.addEventListener("click", leftOrRight, true);
 
 
+    }
 
 
-//READING OF MOUSE POSITION WHEN CLICKING, TRIGGERING FUNCTION LEFT/RIGHT
-function whereClick(){
+    //IF MOUSE IS IN RIGHT SIDE THEN EXECUTE FUNCTION FORWARD, ELSE EXEC FUNCT BACKWARD
+    function leftOrRight() {
 
-	imagen.addEventListener("click" , leftOrRight , true);
-	
-	
+        var x = event.clientX;
 
-}
-
-
-//IF MOUSE IS IN RIGHT SIDE THEN EXECUTE FUNCTION FORWARD, ELSE EXEC FUNCT BACKWARD
-function leftOrRight(){
-
-	var x = event.clientX;
-	
-	console.log("position x:" , x);
-	console.log("image width:" , elmnt.clientWidth);
-	
-
-	if (x > elmnt.clientWidth/2){
-		forward();
-	}else {
-		backward();
-	}
-
-}
-
-//INCREASES THE COUNTER WHEN CLICKING, RESETS COUNTER AT THE END OF ARRAY
-function forward() {
-
-if ( counter < 4){
-  counter++;
-  document.getElementById("imagen").src = fotos[counter];
-
-  // console.log("counter:" , counter);
-} else {
-
-  counter = 0;
-  document.getElementById("imagen").src = fotos[counter];
-}
-   
-}
-
-//DECREASES THE COUNTER WHEN CLICKING, FORCES COUNTER THE LAST IN THE ARRAY IF COUNTER EQUALS 0
-function backward(){
-
-if ( counter == 0 ){
-  counter = 4;
-  document.getElementById("imagen").src = fotos[counter];
-
-  // console.log("counter:" , counter);
-} else {
-
-  counter--;
-  document.getElementById("imagen").src = fotos[counter];
-  // console.log("counter:" , counter);
-}
-   
-}
+        console.log("position x:", x);
+        console.log("image width:", elmnt.clientWidth);
 
 
+        if (x > elmnt.clientWidth / 2) {
+            forward();
+        } else {
+            backward();
+        }
 
+    }
+
+    //INCREASES THE COUNTER WHEN CLICKING, RESETS COUNTER AT THE END OF ARRAY
+    function forward() {
+
+        if (counter < 4) {
+            counter++;
+            document.getElementById("imagen").src = fotos[counter];
+
+            // console.log("counter:" , counter);
+        } else {
+
+            counter = 0;
+            document.getElementById("imagen").src = fotos[counter];
+        }
+
+    }
+
+    //DECREASES THE COUNTER WHEN CLICKING, FORCES COUNTER THE LAST IN THE ARRAY IF COUNTER EQUALS 0
+    function backward() {
+
+        if (counter === 0) {
+            counter = 4;
+            document.getElementById("imagen").src = fotos[counter];
+
+            // console.log("counter:" , counter);
+        } else {
+
+            counter--;
+            document.getElementById("imagen").src = fotos[counter];
+            // console.log("counter:" , counter);
+        }
+
+    }
 </script>
-
-<header>
-
-
 </body>
 </html>
